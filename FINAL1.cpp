@@ -66,23 +66,26 @@ double select(double a[], int p, int r, int k){
 }
 
 int main(){
-    cin>>n;
+	cout<<"How many numbers do you want to put in?\n";
+        cin>>n;
 	double mid;
-    for(int i=0;i<n;i++) cin>>a[i];
+	cout<<"Put in them:\n";
+    	for(int i=0;i<n;i++) cin>>a[i];
 	if(n%2==0) {
 		mid = (select(a, 0, n-1, n/2+1)+select(a, 0, n-1, n/2))/2.0;
 	}
 	else mid = select(a, 0, n-1, n/2+1);
 	for(int i=0;i<n;i++){
 		b[i]=abs(a[i]-mid);
+		if(b[i]==0) b[i]=0xffffff;
 	}
 	double Nt4 = select(b, 0, n-1, n/4);
 	int cnt=0;
 	for(int i=0;i<n;i++){
-		if(abs(a[i]-mid)<Nt4) cnt++,cout<<a[i]<<" ";
+		if(abs(a[i]-mid)<Nt4&&a[i]-mid!=0) cnt++,cout<<a[i]<<" ";
 	}
 	for(int i=0;i<n;i++){
-		if(abs(a[i]-mid)==Nt4&&cnt!=n/4) cnt++,cout<<a[i]<<" ";
+		if(abs(a[i]-mid)==Nt4&&a[i]-mid!=0&&cnt!=n/4) cnt++,cout<<a[i]<<" ";
 	}
 	return 0;
 }
